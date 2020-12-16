@@ -4,11 +4,11 @@
 #include <GLCoreUtils.h>
 #include <stb_image/stb_image.h>
 
-class SandboxLayer : public GLCore::Layer
+class BatchDynamicLayer : public GLCore::Layer
 {
 public:
-	SandboxLayer();
-	virtual ~SandboxLayer();
+	BatchDynamicLayer();
+	virtual ~BatchDynamicLayer();
 
 	virtual void OnAttach() override;
 	virtual void OnDetach() override;

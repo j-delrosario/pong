@@ -1,4 +1,4 @@
-#include "SandboxLayer.h"
+#include "BatchDynamicLayer.h"
 
 using namespace GLCore;
 using namespace GLCore::Utils;
@@ -26,12 +26,12 @@ struct Vertex
 	float TexID;
 };
 
-SandboxLayer::SandboxLayer()
+BatchDynamicLayer::BatchDynamicLayer()
 	: m_CameraController(16.0f / 9.0f)
 {
 }
 
-SandboxLayer::~SandboxLayer()
+BatchDynamicLayer::~BatchDynamicLayer()
 {
 }
 
@@ -55,13 +55,13 @@ static GLuint LoadTexture(const std::string& path)
 	return textureID;
 }
 
-void SandboxLayer::OnAttach()
+void BatchDynamicLayer::OnAttach()
 {
 	EnableGLDebugging();
 
 	m_Shader = std::unique_ptr<Shader>(Shader::FromGLSLTextFiles(
-		"assets/shaders/Sandbox.vert.glsl",
-		"assets/shaders/Sandbox.frag.glsl"
+		"assets/shaders/BatchDynamic.vert.glsl",
+		"assets/shaders/BatchDynamic.frag.glsl"
 	));
 	glUseProgram(m_Shader->GetRendererID());
 	auto loc = glGetUniformLocation(m_Shader->GetRendererID(), "u_Textures");
@@ -118,17 +118,17 @@ void SandboxLayer::OnAttach()
 	m_RatTex = LoadTexture("assets/textures/birthday_rat.png");
 }
 
-void SandboxLayer::OnDetach()
+void BatchDynamicLayer::OnDetach()
 {
 	// Shutdown here
 }
 
-void SandboxLayer::OnEvent(Event& event)
+void BatchDynamicLayer::OnEvent(Event& event)
 {
 	m_CameraController.OnEvent(event);
 }
 
-void SandboxLayer::SetUniformMat4(uint32_t shader, const char* name, const glm::mat4& matrix)
+void BatchDynamicLayer::SetUniformMat4(uint32_t shader, const char* name, const glm::mat4& matrix)
 {
 	int loc = glGetUniformLocation(shader, name);
 	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
@@ -171,7 +171,7 @@ static Vertex* CreateQuad(Vertex* target, float x, float y, float textureID)
 	return target;
 }
 
-void SandboxLayer::OnUpdate(Timestep ts)
+void BatchDynamicLayer::OnUpdate(Timestep ts)
 {
 	m_CameraController.OnUpdate(ts);
 
@@ -219,7 +219,7 @@ void SandboxLayer::OnUpdate(Timestep ts)
 	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 }
 
-void SandboxLayer::OnImGuiRender()
+void BatchDynamicLayer::OnImGuiRender()
 {
 	// ImGui here
 	ImGui::Begin("Controls");

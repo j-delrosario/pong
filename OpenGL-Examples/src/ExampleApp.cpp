@@ -1,5 +1,9 @@
 #include "GLCore.h"
 #include "ExampleLayer.h"
+#include "BatchEx1Layer.h"
+#include "BatchColourLayer.h"
+#include "BatchTexLayer.h"
+#include "BatchDynamicLayer.h"
 
 using namespace GLCore;
 
@@ -9,7 +13,11 @@ public:
 	Example()
 		: Application("OpenGL Examples")
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		//PushLayer(new BatchEx1Layer());
+		//PushLayer(new BatchColourLayer());
+		//PushLayer(new BatchTexLayer());
+		PushLayer(new BatchDynamicLayer());
 	}
 };
 

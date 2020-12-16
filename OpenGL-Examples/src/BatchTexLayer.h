@@ -4,11 +4,11 @@
 #include <GLCoreUtils.h>
 #include <stb_image/stb_image.h>
 
-class SandboxLayer : public GLCore::Layer
+class BatchTexLayer : public GLCore::Layer
 {
 public:
-	SandboxLayer();
-	virtual ~SandboxLayer();
+	BatchTexLayer();
+	virtual ~BatchTexLayer();
 
 	virtual void OnAttach() override;
 	virtual void OnDetach() override;
@@ -22,5 +22,4 @@ private:
 
 	GLuint m_QuadVA, m_QuadVB, m_QuadIB = 0;
 	GLuint m_BonkTex, m_RatTex;
-	float m_QuadPosition[2] = { -1.5f, -0.5f };
 };
