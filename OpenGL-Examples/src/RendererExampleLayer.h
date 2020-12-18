@@ -4,11 +4,11 @@
 #include <GLCoreUtils.h>
 #include <stb_image/stb_image.h>
 
-class SandboxLayer : public GLCore::Layer
+class RendererExampleLayer : public GLCore::Layer
 {
 public:
-	SandboxLayer();
-	virtual ~SandboxLayer();
+	RendererExampleLayer();
+	virtual ~RendererExampleLayer();
 
 	virtual void OnAttach() override;
 	virtual void OnDetach() override;

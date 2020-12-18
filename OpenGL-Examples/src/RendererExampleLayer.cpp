@@ -1,14 +1,14 @@
-#include "SandboxLayer.h"
+#include "RendererExampleLayer.h"
 #include "Renderer.h"
 using namespace GLCore;
 using namespace GLCore::Utils;
 
-SandboxLayer::SandboxLayer()
+RendererExampleLayer::RendererExampleLayer()
 	: m_CameraController(16.0f / 9.0f)
 {
 }
 
-SandboxLayer::~SandboxLayer()
+RendererExampleLayer::~RendererExampleLayer()
 {
 }
 
@@ -32,7 +32,7 @@ static GLuint LoadTexture(const std::string& path)
 	return textureID;
 }
 
-void SandboxLayer::OnAttach()
+void RendererExampleLayer::OnAttach()
 {
 	EnableGLDebugging();
 
@@ -57,12 +57,12 @@ void SandboxLayer::OnAttach()
 	m_RatTex = LoadTexture("assets/textures/birthday_rat.png");
 }
 
-void SandboxLayer::OnDetach()
+void RendererExampleLayer::OnDetach()
 {
 	Renderer::Shutdown();
 }
 
-void SandboxLayer::OnEvent(Event& event)
+void RendererExampleLayer::OnEvent(Event& event)
 {
 	m_CameraController.OnEvent(event);
 
@@ -73,13 +73,13 @@ void SandboxLayer::OnEvent(Event& event)
 	}
 }
 
-void SandboxLayer::SetUniformMat4(uint32_t shader, const char* name, const glm::mat4& matrix)
+void RendererExampleLayer::SetUniformMat4(uint32_t shader, const char* name, const glm::mat4& matrix)
 {
 	int loc = glGetUniformLocation(shader, name);
 	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void SandboxLayer::OnUpdate(Timestep ts)
+void RendererExampleLayer::OnUpdate(Timestep ts)
 {
 	m_CameraController.OnUpdate(ts);
 
@@ -117,7 +117,7 @@ void SandboxLayer::OnUpdate(Timestep ts)
 	Renderer::Flush();
 }
 
-void SandboxLayer::OnImGuiRender()
+void RendererExampleLayer::OnImGuiRender()
 {
 	// ImGui here
 	ImGui::Begin("Controls");
