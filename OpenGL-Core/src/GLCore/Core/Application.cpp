@@ -1,5 +1,6 @@
 #include "glpch.h"
 #include "Application.h"
+#include "../Util/Renderer.h"
 
 #include "Log.h"
 
@@ -27,7 +28,7 @@ namespace GLCore {
 		m_Window = std::unique_ptr<Window>(Window::Create({ name, width, height }));
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
-		// Renderer::Init();
+		GLCore::Utils::Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

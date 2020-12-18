@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "RendererExample.h"
 
 #include <GLCore.h>
 #include <array>
@@ -34,12 +34,12 @@ struct RendererData
 	std::array<uint32_t, MaxTextures> TextureSlots;
 	uint32_t TextureSlotIndex = 1;
 
-	Renderer::Stats RenderStats;
+	RendererExample::Stats RenderStats;
 };
 
 static RendererData s_Data;
 
-void Renderer::Init()
+void RendererExample::Init()
 {
 	s_Data.QuadBuffer = new Vertex[MaxVertexCount];
 
@@ -90,7 +90,7 @@ void Renderer::Init()
 	s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 }
 
-void Renderer::Shutdown()
+void RendererExample::Shutdown()
 {
 	glDeleteVertexArrays(1, &s_Data.QuadVA);
 	glDeleteBuffers(1, &s_Data.QuadVB);
@@ -99,19 +99,19 @@ void Renderer::Shutdown()
 	delete[] s_Data.QuadBuffer;
 }
 
-void Renderer::BeginBatch()
+void RendererExample::BeginBatch()
 {
 	s_Data.QuadBufferPtr = s_Data.QuadBuffer;
 }
 
-void Renderer::EndBatch()
+void RendererExample::EndBatch()
 {
 	GLsizeiptr size = (uint8_t*)s_Data.QuadBufferPtr - (uint8_t*)s_Data.QuadBuffer;
 	glBindBuffer(GL_ARRAY_BUFFER, s_Data.QuadVB);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, size, s_Data.QuadBuffer);
 }
 
-void Renderer::Flush()
+void RendererExample::Flush()
 {
 	for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++) {
 		glBindTextureUnit(i, s_Data.TextureSlots[i]);
@@ -125,7 +125,7 @@ void Renderer::Flush()
 	s_Data.TextureSlotIndex = 1;
 }
 
-void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
+void RendererExample::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
 {
 	if (s_Data.IndexCount >= MaxIndexCount) {
 		EndBatch();
@@ -163,7 +163,7 @@ void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, const 
 	s_Data.RenderStats.QuadCount++;
 }
 
-void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, uint32_t textureID)
+void RendererExample::DrawQuad(const glm::vec2& position, const glm::vec2& size, uint32_t textureID)
 {
 	if (s_Data.IndexCount >= MaxIndexCount || s_Data.TextureSlotIndex > 31) {
 		EndBatch();
@@ -217,12 +217,12 @@ void Renderer::DrawQuad(const glm::vec2& position, const glm::vec2& size, uint32
 	s_Data.RenderStats.QuadCount++;
 }
 
-const Renderer::Stats& Renderer::GetStats()
+const RendererExample::Stats& RendererExample::GetStats()
 {
 	return s_Data.RenderStats;
 }
 
-void Renderer::ResetStats()
+void RendererExample::ResetStats()
 {
 	memset(&s_Data.RenderStats, 0, sizeof(Stats));
 }

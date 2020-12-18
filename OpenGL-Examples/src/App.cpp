@@ -5,6 +5,7 @@
 #include "BatchTexLayer.h"
 #include "BatchDynamicLayer.h"
 #include "RendererExampleLayer.h"
+#include "RendererCoreLayer.h"
 
 using namespace GLCore;
 
@@ -19,7 +20,8 @@ public:
 		//PushLayer(new BatchColourLayer());
 		//PushLayer(new BatchTexLayer());
 		//PushLayer(new BatchDynamicLayer());
-		PushLayer(new RendererExampleLayer());
+		//PushLayer(new RendererExampleLayer());
+		PushLayer(new RendererCoreLayer());
 	}
 };
 

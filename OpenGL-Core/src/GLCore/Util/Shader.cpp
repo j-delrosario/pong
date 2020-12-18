@@ -64,7 +64,7 @@ namespace GLCore::Utils {
 		shader->LoadFromGLSLTextFiles(vertexShaderPath, fragmentShaderPath);
 		return shader;
 	}
-	
+
 	void Shader::LoadFromGLSLTextFiles(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 	{
 		std::string vertexSource = ReadFileAsString(vertexShaderPath);

@@ -1,13 +1,13 @@
-#include "SandboxLayer.h"
+#include "RendererCoreLayer.h"
 
 using namespace GLCore;
 using namespace GLCore::Utils;
 
-SandboxLayer::SandboxLayer()
+RendererCoreLayer::RendererCoreLayer()
 {
 }
 
-SandboxLayer::~SandboxLayer()
+RendererCoreLayer::~RendererCoreLayer()
 {
 }
 
@@ -31,7 +31,7 @@ static GLuint LoadTexture(const std::string& path)
 	return textureID;
 }
 
-void SandboxLayer::OnAttach()
+void RendererCoreLayer::OnAttach()
 {
 	EnableGLDebugging();
 
@@ -39,17 +39,17 @@ void SandboxLayer::OnAttach()
 	m_RatTex = LoadTexture("assets/textures/birthday_rat.png");
 }
 
-void SandboxLayer::OnDetach()
+void RendererCoreLayer::OnDetach()
 {
 	Renderer::Shutdown();
 }
 
-void SandboxLayer::OnEvent(Event& event)
+void RendererCoreLayer::OnEvent(Event& event)
 {
 	Renderer::OnEventCamera(event);
 }
 
-void SandboxLayer::OnUpdate(Timestep ts)
+void RendererCoreLayer::OnUpdate(Timestep ts)
 {
 	Renderer::OnUpdateCamera(ts);
 
@@ -80,7 +80,7 @@ void SandboxLayer::OnUpdate(Timestep ts)
 	Renderer::Flush();
 }
 
-void SandboxLayer::OnImGuiRender()
+void RendererCoreLayer::OnImGuiRender()
 {
 	// ImGui here
 	ImGui::Begin("Controls");

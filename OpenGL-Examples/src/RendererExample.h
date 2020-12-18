@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 
 // 2D Batch Renderer
-class Renderer
+class RendererExample
 {
 public:
 	static void Init();

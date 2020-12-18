@@ -1,5 +1,5 @@
 #include "RendererExampleLayer.h"
-#include "Renderer.h"
+#include "RendererExample.h"
 using namespace GLCore;
 using namespace GLCore::Utils;
 
@@ -50,7 +50,7 @@ void RendererExampleLayer::OnAttach()
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-	Renderer::Init();
+	RendererExample::Init();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	m_BonkTex = LoadTexture("assets/textures/bonk_emoji_transparent.png");
@@ -59,7 +59,7 @@ void RendererExampleLayer::OnAttach()
 
 void RendererExampleLayer::OnDetach()
 {
-	Renderer::Shutdown();
+	RendererExample::Shutdown();
 }
 
 void RendererExampleLayer::OnEvent(Event& event)
@@ -90,15 +90,15 @@ void RendererExampleLayer::OnUpdate(Timestep ts)
 	SetUniformMat4(m_Shader->GetRendererID(), "u_ViewProjection", vp);
 	SetUniformMat4(m_Shader->GetRendererID(), "u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
 
-	Renderer::ResetStats();
-	Renderer::BeginBatch();
+	RendererExample::ResetStats();
+	RendererExample::BeginBatch();
 
 	for (float y = -10.0f; y < 10.0f; y+= 0.25f)
 	{
 		for (float x = -10.0f; x < 10.0f; x += 0.25f)
 		{
 			glm::vec4 color = { (x + 10) / 20.0f, 0.2f, (y + 10) / 20.0f, 1.0f };
-			Renderer::DrawQuad({ x, y }, { 0.25f, 0.25f }, color);
+			RendererExample::DrawQuad({ x, y }, { 0.25f, 0.25f }, color);
 		}
 	}
 
@@ -107,14 +107,14 @@ void RendererExampleLayer::OnUpdate(Timestep ts)
 		for (int x = 0; x < 5; x++)
 		{
 			GLuint tex = (x + y) % 2 == 0 ? m_BonkTex : m_RatTex;
-			Renderer::DrawQuad({ x, y }, { 1.0f, 1.0f }, tex);
+			RendererExample::DrawQuad({ x, y }, { 1.0f, 1.0f }, tex);
 		}
 	}
 
-	Renderer::DrawQuad(m_QuadPosition, { 1.0f, 1.0f }, m_BonkTex);
-	Renderer::EndBatch();
+	RendererExample::DrawQuad(m_QuadPosition, { 1.0f, 1.0f }, m_BonkTex);
+	RendererExample::EndBatch();
 
-	Renderer::Flush();
+	RendererExample::Flush();
 }
 
 void RendererExampleLayer::OnImGuiRender()
@@ -122,8 +122,8 @@ void RendererExampleLayer::OnImGuiRender()
 	// ImGui here
 	ImGui::Begin("Controls");
 	ImGui::DragFloat2("QuadPosition", glm::value_ptr(m_QuadPosition), 0.1f);
-	ImGui::Text("Quads: %d", Renderer::GetStats().QuadCount);
-	ImGui::Text("Draws: %d", Renderer::GetStats().DrawCount);
+	ImGui::Text("Quads: %d", RendererExample::GetStats().QuadCount);
+	ImGui::Text("Draws: %d", RendererExample::GetStats().DrawCount);
 	ImGui::End();
 }
 
