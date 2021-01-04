@@ -13,6 +13,7 @@ namespace GLCore::Utils {
 	public:
 		OrthographicCameraController(float aspectRatio, bool rotation = false);
 
+		void OnUpdateFixed(Timestep ts);
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 

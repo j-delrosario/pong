@@ -11,6 +11,12 @@ namespace GLCore::Utils {
 	{
 	}
 
+	void OrthographicCameraController::OnUpdateFixed(Timestep ts)
+	{
+		m_Camera.SetPosition(m_CameraPosition);
+		m_CameraTranslationSpeed = m_ZoomLevel;
+	}
+
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
 		if (Input::IsKeyPressed(HZ_KEY_A))

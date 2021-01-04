@@ -20,6 +20,7 @@ namespace GLCore::Utils {
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, uint32_t textureID);
 
+		static void OnUpdateFixedCamera(Timestep ts);
 		static void OnUpdateCamera(Timestep ts);
 		static void OnEventCamera(Event& e);
 

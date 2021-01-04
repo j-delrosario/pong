@@ -242,6 +242,18 @@ namespace GLCore::Utils {
 		s_Data.RenderStats.QuadCount++;
 	}
 
+	void Renderer::OnUpdateFixedCamera(Timestep ts)
+	{
+		s_Data.CameraController.OnUpdateFixed(ts);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+		glUseProgram(s_Data.Shader->GetRendererID());
+
+		auto vp = s_Data.CameraController.GetCamera().GetViewProjectionMatrix();
+		Renderer::SetUniformMat4(s_Data.Shader->GetRendererID(), "u_ViewProjection", vp);
+		Renderer::SetUniformMat4(s_Data.Shader->GetRendererID(), "u_Transform", glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)));
+	}
+
 	void Renderer::OnUpdateCamera(Timestep ts)
 	{
 		s_Data.CameraController.OnUpdate(ts);
