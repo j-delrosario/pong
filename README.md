@@ -1,5 +1,5 @@
 # OpenGL-Sandbox
-Pong built as an game built using custom OpenGL framework;  
+Pong game built using custom OpenGL framework;  
 found here https://github.com/j-delrosario/OpenGL.git  
 originally forked from https://github.com/TheCherno/OpenGL.git.  
 
